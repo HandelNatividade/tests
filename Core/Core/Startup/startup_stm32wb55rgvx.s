@@ -104,7 +104,7 @@ Reset_Handler:
 
 /* Zero fill the bss segments. */
   INIT_BSS _sbss, _ebss
-	INIT_BSS _sMB_MEM2, _eMB_MEM2
+
 /* Call static constructors */
   bl __libc_init_array
 /* Call the application s entry point.*/

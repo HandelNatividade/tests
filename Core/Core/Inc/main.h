@@ -28,12 +28,10 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32wbxx_hal.h"
-#include "app_conf.h"
-#include "app_entry.h"
-#include "app_common.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "stm32wbxx_nucleo.h"
+
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -55,20 +53,13 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
-void MX_LPUART1_UART_Init(void);
-void MX_USART1_UART_Init(void);
-
 
 /* USER CODE BEGIN EFP */
-void Read_Accelerometer(void);
+
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define NCS_Pin GPIO_PIN_4
-#define NCS_GPIO_Port GPIOA
-#define FIFO_FULL_GPIO_Port GPIOA
-#define FIFO_FULL_Pin GPIO_PIN_9
-#define FIFO_FULL_EXTI_IRQn EXTI9_5_IRQn
+
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

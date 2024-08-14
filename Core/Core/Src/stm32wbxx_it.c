@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2019-2021 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -55,15 +55,7 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-extern IPCC_HandleTypeDef hipcc;
-extern DMA_HandleTypeDef hdma_lpuart1_tx;
-extern DMA_HandleTypeDef hdma_usart1_tx;
-extern UART_HandleTypeDef hlpuart1;
-extern UART_HandleTypeDef huart1;
-extern RTC_HandleTypeDef hrtc;
-extern DMA_HandleTypeDef hdma_spi1_rx;
-extern DMA_HandleTypeDef hdma_spi1_tx;
-extern SPI_HandleTypeDef hspi1;
+
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -80,7 +72,9 @@ void NMI_Handler(void)
 
   /* USER CODE END NonMaskableInt_IRQn 0 */
   /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
-
+  while (1)
+  {
+  }
   /* USER CODE END NonMaskableInt_IRQn 1 */
 }
 
@@ -193,7 +187,7 @@ void SysTick_Handler(void)
   /* USER CODE END SysTick_IRQn 0 */
   HAL_IncTick();
   /* USER CODE BEGIN SysTick_IRQn 1 */
-  HAL_SYSTICK_IRQHandler();
+
   /* USER CODE END SysTick_IRQn 1 */
 }
 
@@ -204,206 +198,6 @@ void SysTick_Handler(void)
 /* please refer to the startup file (startup_stm32wbxx.s).                    */
 /******************************************************************************/
 
-/**
-  * @brief This function handles RTC wake-up interrupt through EXTI line 19.
-  */
-void RTC_WKUP_IRQHandler(void)
-{
-  /* USER CODE BEGIN RTC_WKUP_IRQn 0 */
-
-  /* USER CODE END RTC_WKUP_IRQn 0 */
-  HAL_RTCEx_WakeUpTimerIRQHandler(&hrtc);
-  /* USER CODE BEGIN RTC_WKUP_IRQn 1 */
-
-  /* USER CODE END RTC_WKUP_IRQn 1 */
-}
-
-/**
-  * @brief This function handles DMA1 channel1 global interrupt.
-  */
-void DMA1_Channel1_IRQHandler(void)
-{
-  /* USER CODE BEGIN DMA1_Channel1_IRQn 0 */
-
-  /* USER CODE END DMA1_Channel1_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_spi1_rx);
-  /* USER CODE BEGIN DMA1_Channel1_IRQn 1 */
-
-  /* USER CODE END DMA1_Channel1_IRQn 1 */
-}
-
-/**
-  * @brief This function handles DMA1 channel2 global interrupt.
-  */
-void DMA1_Channel2_IRQHandler(void)
-{
-  /* USER CODE BEGIN DMA1_Channel2_IRQn 0 */
-
-  /* USER CODE END DMA1_Channel2_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_spi1_tx);
-  /* USER CODE BEGIN DMA1_Channel2_IRQn 1 */
-
-  /* USER CODE END DMA1_Channel2_IRQn 1 */
-}
-
-/**
-  * @brief This function handles DMA1 channel4 global interrupt.
-  */
-void DMA1_Channel4_IRQHandler(void)
-{
-  /* USER CODE BEGIN DMA1_Channel4_IRQn 0 */
-
-  /* USER CODE END DMA1_Channel4_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_lpuart1_tx);
-  /* USER CODE BEGIN DMA1_Channel4_IRQn 1 */
-
-  /* USER CODE END DMA1_Channel4_IRQn 1 */
-}
-
-/**
-  * @brief This function handles EXTI line[9:5] interrupts.
-  */
-void EXTI9_5_IRQHandler(void)
-{
-  /* USER CODE BEGIN EXTI9_5_IRQn 0 */
-
-  /* USER CODE END EXTI9_5_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(FIFO_FULL_Pin);
-  /* USER CODE BEGIN EXTI9_5_IRQn 1 */
-
-  /* USER CODE END EXTI9_5_IRQn 1 */
-}
-
-/**
-  * @brief This function handles SPI1 global interrupt.
-  */
-void SPI1_IRQHandler(void)
-{
-  /* USER CODE BEGIN SPI1_IRQn 0 */
-
-  /* USER CODE END SPI1_IRQn 0 */
-  HAL_SPI_IRQHandler(&hspi1);
-  /* USER CODE BEGIN SPI1_IRQn 1 */
-
-  /* USER CODE END SPI1_IRQn 1 */
-}
-
-/**
-  * @brief This function handles USART1 global interrupt.
-  */
-void USART1_IRQHandler(void)
-{
-  /* USER CODE BEGIN USART1_IRQn 0 */
-
-  /* USER CODE END USART1_IRQn 0 */
-  HAL_UART_IRQHandler(&huart1);
-  /* USER CODE BEGIN USART1_IRQn 1 */
-
-  /* USER CODE END USART1_IRQn 1 */
-}
-
-/**
-  * @brief This function handles LPUART1 global interrupt.
-  */
-void LPUART1_IRQHandler(void)
-{
-  /* USER CODE BEGIN LPUART1_IRQn 0 */
-
-  /* USER CODE END LPUART1_IRQn 0 */
-  HAL_UART_IRQHandler(&hlpuart1);
-  /* USER CODE BEGIN LPUART1_IRQn 1 */
-
-  /* USER CODE END LPUART1_IRQn 1 */
-}
-
-/**
-  * @brief This function handles IPCC RX occupied interrupt.
-  */
-void IPCC_C1_RX_IRQHandler(void)
-{
-  /* USER CODE BEGIN IPCC_C1_RX_IRQn 0 */
-
-  /* USER CODE END IPCC_C1_RX_IRQn 0 */
-  HAL_IPCC_RX_IRQHandler(&hipcc);
-  /* USER CODE BEGIN IPCC_C1_RX_IRQn 1 */
-
-  /* USER CODE END IPCC_C1_RX_IRQn 1 */
-}
-
-/**
-  * @brief This function handles IPCC TX free interrupt.
-  */
-void IPCC_C1_TX_IRQHandler(void)
-{
-  /* USER CODE BEGIN IPCC_C1_TX_IRQn 0 */
-
-  /* USER CODE END IPCC_C1_TX_IRQn 0 */
-  HAL_IPCC_TX_IRQHandler(&hipcc);
-  /* USER CODE BEGIN IPCC_C1_TX_IRQn 1 */
-
-  /* USER CODE END IPCC_C1_TX_IRQn 1 */
-}
-
-/**
-  * @brief This function handles HSEM global interrupt.
-  */
-void HSEM_IRQHandler(void)
-{
-  /* USER CODE BEGIN HSEM_IRQn 0 */
-
-  /* USER CODE END HSEM_IRQn 0 */
-  HAL_HSEM_IRQHandler();
-  /* USER CODE BEGIN HSEM_IRQn 1 */
-
-  /* USER CODE END HSEM_IRQn 1 */
-}
-
-/**
-  * @brief This function handles DMA2 channel4 global interrupt.
-  */
-void DMA2_Channel4_IRQHandler(void)
-{
-  /* USER CODE BEGIN DMA2_Channel4_IRQn 0 */
-
-  /* USER CODE END DMA2_Channel4_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_usart1_tx);
-  /* USER CODE BEGIN DMA2_Channel4_IRQn 1 */
-
-  /* USER CODE END DMA2_Channel4_IRQn 1 */
-}
-
 /* USER CODE BEGIN 1 */
-/**
- * @brief  This function handles External line
- *         interrupt request.
- * @param  None
- * @retval None
- */
-void PUSH_BUTTON_SW1_EXTI_IRQHandler(void)
-{
-  HAL_GPIO_EXTI_IRQHandler(BUTTON_SW1_PIN);
-}
-
-/**
- * @brief  This function handles External line
- *         interrupt request.
- * @param  None
- * @retval None
- */
-void PUSH_BUTTON_SW2_EXTI_IRQHandler(void)
-{
-  HAL_GPIO_EXTI_IRQHandler(BUTTON_SW2_PIN);
-}
-
-/**
- * @brief  This function handles External line
- *         interrupt request.
- * @param  None
- * @retval None
- */
-void PUSH_BUTTON_SW3_EXTI_IRQHandler(void)
-{
-  HAL_GPIO_EXTI_IRQHandler(BUTTON_SW3_PIN);
-}
 
 /* USER CODE END 1 */
